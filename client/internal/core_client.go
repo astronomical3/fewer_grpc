@@ -106,6 +106,7 @@ func (c *CoreFewerSrvClient) PerformGetAggregatesOp(totalInputs int) error {
 	// Also, create a recvErr channel that will return the error of the receive
 	//   operation.
 	recvErr := make(chan error)
+	defer close(recvErr)
 	go func() {
 		for {
 			resp, err := numStream.Recv()
