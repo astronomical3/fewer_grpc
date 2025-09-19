@@ -7,7 +7,10 @@ require (
 	google.golang.org/protobuf v1.36.9
 )
 
+require github.com/go-logfmt/logfmt v0.5.1 // indirect
+
 require (
+	github.com/go-kit/log v0.2.1
 	golang.org/x/net v0.41.0 // indirect
 	golang.org/x/sys v0.33.0 // indirect
 	golang.org/x/text v0.26.0 // indirect
