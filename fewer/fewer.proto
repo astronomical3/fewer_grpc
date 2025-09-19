@@ -1,0 +1,26 @@
+syntax = "proto3";
+
+option go_package = "github.com/astronomical3/fewer_grpc/fewer";
+
+package fewer;
+
+// Service that returns an aggregate result per few numbers sent over to the service.
+//   The service will return fewer NumberResponse messages than it will receive 
+//   NumberRequest messages, hence the term "Fewer Service".
+service FewerService {
+    rpc GetAggregatesStream(stream NumberRequest) returns (stream NumberResponse) {};
+}
+
+// Message that a client sends over to the Fewer Service, representing some data to aggregate
+//   with a few other aggregates sent at a particular point in time.
+message NumberRequest {
+    int32 input_num = 1;
+}
+
+// Message that the Fewer Service responds with after aggregating some individual messages of 
+//   data (in this case, NumberResult messages) representing an aggregate result.  In this case,
+//   the aggregate result is a sum of the numbers inside a few NumberResult messages sent by a
+//   client at one time.
+message NumberResponse {
+    int32 result = 1;
+}
