@@ -41,10 +41,10 @@ func NewClientLoggingObjectPROD(clientLogFilename string) *ClientLoggingObjectPR
 	terminalLogger = log.With(terminalLogger, "time", log.DefaultTimestampUTC)
 
 	// Add filepath to clientlogs directory to get full client log file path.
-	clientLogFilename = "fewer_grpc/client/clientlogs/production/" + clientLogFilename
+	//   clientLogFilename = "github.com/astronomical3/fewer_grpc/client/clientlogs/production/" + clientLogFilename
 
 	// Create or open the client log file object
-	clientLogFile, err := os.OpenFile(clientLogFilename, os.O_WRONLY|os.O_CREATE|os.O_APPEND, 0600)
+	clientLogFile, err := os.OpenFile(clientLogFilename, os.O_WRONLY|os.O_CREATE|os.O_APPEND, 0644)
 	if err != nil {
 		panic(err)
 	}
@@ -114,10 +114,10 @@ func NewClientLoggingObjectDEV(clientLogFilename string) *ClientLoggingObjectDEV
 	terminalLogger = log.With(terminalLogger, "time", log.DefaultTimestampUTC)
 
 	// Add filepath to clientlogs directory to get full client log file path.
-	clientLogFilename = "fewer_grpc/client/clientlogs/devtest/" + clientLogFilename
+	clientLogFilename = "github.com/astronomical3/fewer_grpc/client/clientlogs/devtest/" + clientLogFilename
 
 	// Create or open the client log file object
-	clientLogFile, err := os.OpenFile(clientLogFilename, os.O_WRONLY|os.O_CREATE|os.O_APPEND, 0600)
+	clientLogFile, err := os.OpenFile(clientLogFilename, os.O_WRONLY|os.O_CREATE|os.O_APPEND, 0644)
 	if err != nil {
 		panic (err)
 	}

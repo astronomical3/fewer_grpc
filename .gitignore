@@ -30,5 +30,4 @@ go.work
 # Project-specific ignores
 
 # Ignore all logs
-client/clientlogs/*
-server/serverlogs/*
+*.log

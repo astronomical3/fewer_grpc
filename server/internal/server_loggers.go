@@ -43,10 +43,10 @@ func NewServerLoggingObjectPROD(serverLogFilename string) *ServerLoggingObjectPR
 	terminalLogger = log.With(terminalLogger, "time", log.DefaultTimestampUTC)
 
 	// Add filepath to serverlogs directory to get full server log filepath.
-	serverLogFilename = "fewer_grpc/server/serverlogs/production/" + serverLogFilename
+	//   serverLogFilename = "github.com/astronomical3/fewer_grpc/server/serverlogs/production/" + serverLogFilename
 
 	// Create or open the server log file object
-	serverLogFile, err := os.OpenFile(serverLogFilename, os.O_WRONLY|os.O_CREATE|os.O_APPEND, 0600)
+	serverLogFile, err := os.OpenFile(serverLogFilename, os.O_WRONLY|os.O_CREATE|os.O_APPEND, 0644)
 	if err != nil {
 		panic(err)
 	}
@@ -117,10 +117,10 @@ func NewServerLoggingObjectDEV(serverLogFilename string) *ServerLoggingObjectDEV
 	terminalLogger = log.With(terminalLogger, "time", log.DefaultTimestampUTC)
 
 	// Add filepath to serverlogs directory to get full server log filepath.
-	serverLogFilename = "fewer_grpc/server/serverlogs/devtest/" + serverLogFilename
+	//   serverLogFilename = "github.com/astronomical3/fewer_grpc/server/serverlogs/devtest/" + serverLogFilename
 
 	// Create or open the server log file object
-	serverLogFile, err := os.OpenFile(serverLogFilename, os.O_WRONLY|os.O_CREATE|os.O_APPEND, 0600)
+	serverLogFile, err := os.OpenFile(serverLogFilename, os.O_WRONLY|os.O_CREATE|os.O_APPEND, 0644)
 	if err != nil {
 		panic (err)
 	}
