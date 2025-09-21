@@ -43,12 +43,13 @@ func (cli *Cli) LoadAndParseFlags() {
 func (cli *Cli) PerformGetAggregatesOp() error {
 	// Create a ClientLogger, based on whether the client will be production
 	//   or development/testing (non-production).
-	const clientLogFilename = "client.log"
+	const clientLogProdFilename = "client.log"
+	const clientLogDevFilename = "client_devtest.log"
 	var clientLogger ClientLogger
 	if *cli.prod {
-		clientLogger = NewClientLoggingObjectPROD(clientLogFilename)
+		clientLogger = NewClientLoggingObjectPROD(clientLogProdFilename)
 	} else {
-		clientLogger = NewClientLoggingObjectDEV(clientLogFilename)
+		clientLogger = NewClientLoggingObjectDEV(clientLogDevFilename)
 	}
 
 	// Create core client object.
