@@ -93,6 +93,9 @@ func (clop *ClientLoggingObjectPROD) Close() {
 // Definition of a development-level client activity logger that logs both on the 
 //   terminal/standard output and a file.
 type ClientLoggingObjectDEV struct {
+	// Inherit the ClientLoggingObjectPROD methods, because they satify the ClientLogger
+	//   interface
+	ClientLoggingObjectPROD
 	// Log only current session activity on standard output
 	terminalLogger   log.Logger
 	// Log all client sessions' history on a file
@@ -139,28 +142,3 @@ func (clod *ClientLoggingObjectDEV) ClientLogDebug(key, value, message string) {
 	level.Debug(clod.clientFileLogger).Log(key, value, "message", message)
 }
 
-// Method of the ClientLoggingObjectDEV that is used for simultaneously logging INFO-level
-//   activity on both the terminal and client log file.
-func (clod *ClientLoggingObjectDEV) ClientLogInfo(key, value, message string) {
-	go level.Info(clod.terminalLogger).Log(key, value, "message", message)
-	level.Info(clod.clientFileLogger).Log(key, value, "message", message)
-}
-
-// Method of the ClientLoggingObjectDEV that is used for simultaneously logging WARN-level 
-//   activity on both the terminal and client log file.
-func (clod *ClientLoggingObjectDEV) ClientLogWarn(key, value, message string) {
-	go level.Warn(clod.terminalLogger).Log(key, value, "message", message)
-	level.Warn(clod.clientFileLogger).Log(key, value, "message", message)
-}
-
-// Method of the ClientLoggingObjectDEV that is used for simultaneously logging ERROR-level 
-//   activity on both the terminal and client log file.
-func (clod *ClientLoggingObjectDEV) ClientLogError(key, value, message string) {
-	go level.Error(clod.terminalLogger).Log(key, value, "error", message)
-	level.Error(clod.clientFileLogger).Log(key, value, "error", message)
-}
-
-// Method of the ClientLoggingObjectDEV that is used for closing the client log file properly.
-func (clod *ClientLoggingObjectDEV) Close() {
-	clod.clientLogFile.Close()
-}
