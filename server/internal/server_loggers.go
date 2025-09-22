@@ -66,21 +66,21 @@ func NewServerLoggingObjectPROD(serverLogFilename string) *ServerLoggingObjectPR
 // Method of the ServerLoggingObjectPROD that is used for simultaneously logging
 //   INFO-level activity on both the terminal and server log file.
 func (slop *ServerLoggingObjectPROD) ServerLogInfo(key, value, message string) {
-	go level.Info(slop.terminalLogger).Log(key, value, "message", message)
+	level.Info(slop.terminalLogger).Log(key, value, "message", message)
 	level.Info(slop.serverFileLogger).Log(key, value, "message", message)
 }
 
 // Method of the ServerLoggingObjectPROD that is used for simultaneously logging
 //   WARN-level activity on both the terminal and server log file.
 func (slop *ServerLoggingObjectPROD) ServerLogWarn(key, value, message string) {
-	go level.Warn(slop.terminalLogger).Log(key, value, "message", message)
+	level.Warn(slop.terminalLogger).Log(key, value, "message", message)
 	level.Warn(slop.serverFileLogger).Log(key, value, "message", message)
 }
 
 // Method of the ServerLoggingObjectPROD that is used for simultaneouslu logging
 //   ERROR-level activity on both the terminal and server log file.
 func (slop *ServerLoggingObjectPROD) ServerLogError(key, value, message string) {
-	go level.Error(slop.terminalLogger).Log(key, value, "error", message)
+	level.Error(slop.terminalLogger).Log(key, value, "error", message)
 	level.Error(slop.serverFileLogger).Log(key, value, "error", message)
 }
 
@@ -139,28 +139,28 @@ func NewServerLoggingObjectDEV(serverLogFilename string) *ServerLoggingObjectDEV
 // This is an operation only used when using a ServerLoggingObjectDEV for a 
 //   ServerLogger.
 func (slod *ServerLoggingObjectDEV) ServerLogDebug(key, value, message string) {
-	go level.Debug(slod.terminalLogger).Log(key, value, "message", message)
+	level.Debug(slod.terminalLogger).Log(key, value, "message", message)
 	level.Debug(slod.serverFileLogger).Log(key, value, "message", message)
 }
 
 // Method of the ServerLoggingObjectDEV that is used for simultaneously logging
 //   INFO-level activity on both the terminal and server log file.
 func (slod *ServerLoggingObjectDEV) ServerLogInfo(key, value, message string) {
-	go level.Info(slod.terminalLogger).Log(key, value, "message", message)
+	level.Info(slod.terminalLogger).Log(key, value, "message", message)
 	level.Info(slod.serverFileLogger).Log(key, value, "message", message)
 }
 
 // Method of the ServerLoggingObjectDEV that is used for simultaneously logging
 //   WARN-level activity on both the terminal and server log file.
 func (slod *ServerLoggingObjectDEV) ServerLogWarn(key, value, message string) {
-	go level.Warn(slod.terminalLogger).Log(key, value, "message", message)
+	level.Warn(slod.terminalLogger).Log(key, value, "message", message)
 	level.Warn(slod.serverFileLogger).Log(key, value, "message", message)
 }
 
 // Method of the ServerLoggingObjectDEV that is used for simultaneously logging
 //   ERROR-level activity on both the terminal and server log file.
 func (slod *ServerLoggingObjectDEV) ServerLogError(key, value, message string) {
-	go level.Error(slod.terminalLogger).Log(key, value, "error", message)
+	level.Error(slod.terminalLogger).Log(key, value, "error", message)
 	level.Error(slod.serverFileLogger).Log(key, value, "error", message)
 }
 

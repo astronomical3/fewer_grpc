@@ -64,21 +64,21 @@ func NewClientLoggingObjectPROD(clientLogFilename string) *ClientLoggingObjectPR
 // Method of the ClientLoggingObjectPROD that is used for simultaneously logging INFO-level
 //   activity on both the terminal and client log file.
 func (clop *ClientLoggingObjectPROD) ClientLogInfo(key, value, message string) {
-	go level.Info(clop.terminalLogger).Log(key, value, "message", message)
+	level.Info(clop.terminalLogger).Log(key, value, "message", message)
 	level.Info(clop.clientFileLogger).Log(key, value, "message", message)
 }
 
 // Method of the ClientLoggingObjectPROD that is used for simultaneously logging WARN-level
 //   activity on both the terminal and client log file.
 func (clop *ClientLoggingObjectPROD) ClientLogWarn(key, value, message string) {
-	go level.Warn(clop.terminalLogger).Log(key, value, "message", message)
+	level.Warn(clop.terminalLogger).Log(key, value, "message", message)
 	level.Warn(clop.clientFileLogger).Log(key, value, "message", message)
 }
 
 // Method of the ClientLoggingObjectPROD that is used for simultaneously logging ERROR-level
 //   activity on both the terminal and client log file.
 func (clop *ClientLoggingObjectPROD) ClientLogError(key, value, message string) {
-	go level.Error(clop.terminalLogger).Log(key, value, "error", message)
+	level.Error(clop.terminalLogger).Log(key, value, "error", message)
 	level.Error(clop.clientFileLogger).Log(key, value, "error", message)
 }
 
@@ -135,28 +135,28 @@ func NewClientLoggingObjectDEV(clientLogFilename string) *ClientLoggingObjectDEV
 //   activity on both the terminal and client log file.  This is an operation only used when
 //   a ClientLoggingObjectDev for a ClientLogger.
 func (clod *ClientLoggingObjectDEV) ClientLogDebug(key, value, message string) {
-	go level.Debug(clod.terminalLogger).Log(key, value, "message", message)
+	level.Debug(clod.terminalLogger).Log(key, value, "message", message)
 	level.Debug(clod.clientFileLogger).Log(key, value, "message", message)
 }
 
 // Method of the ClientLoggingObjectDEV that is used for simultaneously logging INFO-level
 //   activity on both the terminal and client log file.
 func (clod *ClientLoggingObjectDEV) ClientLogInfo(key, value, message string) {
-	go level.Info(clod.terminalLogger).Log(key, value, "message", message)
+	level.Info(clod.terminalLogger).Log(key, value, "message", message)
 	level.Info(clod.clientFileLogger).Log(key, value, "message", message)
 }
 
 // Method of the ClientLoggingObjectDEV that is used for simultaneously logging WARN-level
 //   activity on both the terminal and client log file.
 func (clod *ClientLoggingObjectDEV) ClientLogWarn(key, value, message string) {
-	go level.Warn(clod.terminalLogger).Log(key, value, "message", message)
+	level.Warn(clod.terminalLogger).Log(key, value, "message", message)
 	level.Warn(clod.clientFileLogger).Log(key, value, "message", message)
 }
 
 // Method of the ClientLoggingObjectDEV that is used for simultaneously logging ERROR-level
 //   activity on both the terminal and client log file.
 func (clod *ClientLoggingObjectDEV) ClientLogError(key, value, message string) {
-	go level.Warn(clod.terminalLogger).Log(key, value, "error", message)
+	level.Warn(clod.terminalLogger).Log(key, value, "error", message)
 	level.Warn(clod.clientFileLogger).Log(key, value, "error", message)
 }
 
