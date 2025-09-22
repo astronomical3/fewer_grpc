@@ -24,6 +24,9 @@ var port = flag.Int("port", 50051, "port of server to serve on")
 var prod = flag.Bool("prod", true, "indicates whether server is production server or development server")
 
 func main() {
+	// Load and parse the values of the flags provided in the 'go run' command.
+	flag.Parse()
+	
 	// Create a listener, lis, that will listen to requests to the address and port
 	//   provided by the 'go run' command flags.
 	addrString := fmt.Sprintf("%s:%d", *address, *port)
