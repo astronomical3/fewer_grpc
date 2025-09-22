@@ -11,7 +11,8 @@ import (
 
 // Provide a name of the production-level or development-level server activity log file.
 //   The filename is relative to the fewer_grpc/server/serverlogs/ directory path.
-const serverLogFilename = "server.log"
+const serverLogProdFilename = "server.log"
+const serverLogDevFilename = "server_devtest.log"
 
 // Definition of the --address flag of the 'go run [fewer_grpc/server/]app.go' command.
 var address = flag.String("address", "localhost", "address of server to serve on")
@@ -32,6 +33,12 @@ func main() {
 	}
 
 	// Create a new GeneralFewerServer object.
+	var serverLogFilename string
+	if *prod {
+		serverLogFilename = serverLogProdFilename
+	} else {
+		serverLogFilename = serverLogDevFilename
+	}
 	genServer := internal.NewGeneralFewerServer(serverLogFilename, lis, *prod)
 
 	// Have the GeneralFewerServer object serve clients.  This method also handles

@@ -96,9 +96,6 @@ func (slop *ServerLoggingObjectPROD) Close() {
 // Definition of a development-level server activity logger that logs both on the terminal/stdout
 //   and a file.
 type ServerLoggingObjectDEV struct {
-	// Inherit the ServerLoggingObjectPROD methods, because they also satisfy the 
-	// ServerLogger interface.
-	ServerLoggingObjectPROD
 	// Log only current server session activity on standard output
 	terminalLogger   log.Logger
 	// Log all server sessions' history on a file
@@ -122,7 +119,7 @@ func NewServerLoggingObjectDEV(serverLogFilename string) *ServerLoggingObjectDEV
 	// Create or open the server log file object
 	serverLogFile, err := os.OpenFile(serverLogFilename, os.O_WRONLY|os.O_CREATE|os.O_APPEND, 0644)
 	if err != nil {
-		panic (err)
+		panic(err)
 	}
 
 	// Create the logger to operate logging operations on the server log file
@@ -144,4 +141,31 @@ func NewServerLoggingObjectDEV(serverLogFilename string) *ServerLoggingObjectDEV
 func (slod *ServerLoggingObjectDEV) ServerLogDebug(key, value, message string) {
 	go level.Debug(slod.terminalLogger).Log(key, value, "message", message)
 	level.Debug(slod.serverFileLogger).Log(key, value, "message", message)
+}
+
+// Method of the ServerLoggingObjectDEV that is used for simultaneously logging
+//   INFO-level activity on both the terminal and server log file.
+func (slod *ServerLoggingObjectDEV) ServerLogInfo(key, value, message string) {
+	go level.Info(slod.terminalLogger).Log(key, value, "message", message)
+	level.Info(slod.serverFileLogger).Log(key, value, "message", message)
+}
+
+// Method of the ServerLoggingObjectDEV that is used for simultaneously logging
+//   WARN-level activity on both the terminal and server log file.
+func (slod *ServerLoggingObjectDEV) ServerLogWarn(key, value, message string) {
+	go level.Warn(slod.terminalLogger).Log(key, value, "message", message)
+	level.Warn(slod.serverFileLogger).Log(key, value, "message", message)
+}
+
+// Method of the ServerLoggingObjectDEV that is used for simultaneously logging
+//   ERROR-level activity on both the terminal and server log file.
+func (slod *ServerLoggingObjectDEV) ServerLogError(key, value, message string) {
+	go level.Error(slod.terminalLogger).Log(key, value, "error", message)
+	level.Error(slod.serverFileLogger).Log(key, value, "error", message)
+}
+
+// Method of the ServerLoggingObjectDEV that is used for closing the server log
+//   file properly.
+func (slod *ServerLoggingObjectDEV) Close() {
+	slod.serverLogFile.Close()
 }
