@@ -32,6 +32,7 @@ func NewFewerService(serverLogger ServerLogger) *FewerService {
 //   name "Fewer Service").  If this operation is successful, it can be assumed that 
 //   bidirectional streaming RPCs are useful for different types of batch processing.
 func (s *FewerService) GetAggregatesStream(stream pb.FewerService_GetAggregatesStreamServer) error {
+	s.serverLogger.ServerLogInfo("rpc", "pb.FewerService_GetAggregatesStream", "~~~~~~~~~~~~STARTING RPC OPERATION NOW~~~~~~~~~~~")
 	i := 0
 	sum := int32(0)
 	for {
@@ -60,6 +61,7 @@ func (s *FewerService) GetAggregatesStream(stream pb.FewerService_GetAggregatesS
 					"No leftover data after final sum.  Last sum returned is actual final sum.",
 				)
 			}
+			s.serverLogger.ServerLogInfo("rpc", "pb.FewerService_GetAggregatesStream", "~~~~~~~~~~~~END OF RPC OPERATION~~~~~~~~~~~")
 			return nil
 		}
 
@@ -70,6 +72,7 @@ func (s *FewerService) GetAggregatesStream(stream pb.FewerService_GetAggregatesS
 				"pb.FewerService_GetAggregatesStream",
 				fmt.Sprintf("Could not receive latest request at iteration %d: %v", (i + 1), err),
 			)
+			s.serverLogger.ServerLogInfo("rpc", "pb.FewerService_GetAggregatesStream", "~~~~~~~~~~~~END OF RPC OPERATION~~~~~~~~~~~")
 			return err
 		}
 
@@ -97,6 +100,7 @@ func (s *FewerService) GetAggregatesStream(stream pb.FewerService_GetAggregatesS
 					"pb.FewerService_GetAggregatesStream",
 					fmt.Sprintf("Could not send latest sum %d to client", sum),
 				)
+				s.serverLogger.ServerLogInfo("rpc", "pb.FewerService_GetAggregatesStream", "~~~~~~~~~~~~END OF RPC OPERATION~~~~~~~~~~~")
 				return err
 			}
 			sum = int32(0)
